@@ -4,8 +4,8 @@ const todoControl = document.querySelector('.todo-control'),
       headerInput = document.querySelector('.header-input'),
       todoList = document.querySelector('.todo-list'),
       todoCompleted = document.querySelector('.todo-completed');
-const toDoData = [
-];
+let toDoData = [];
+
 
 const render = function() {
   todoList.textContent = '';
@@ -29,6 +29,7 @@ const render = function() {
     const todoComplete = li.querySelector('.todo-complete');
     todoComplete.addEventListener('click', function(){
       item.completed = !item.completed;
+      localStorage.setItem('todo', JSON.stringify(toDoData));
       render();
     });
     // удаление
@@ -51,7 +52,11 @@ todoControl.addEventListener('submit', function(event) {
   };
   toDoData.push(newTodo);
   headerInput.value = '';
+  localStorage.setItem('todo', JSON.stringify(toDoData));
   render();
 });
-
+console.log(localStorage.getItem('todo'));
+if (localStorage.getItem('todo') !== null){
+  toDoData = JSON.parse(localStorage.getItem('todo'));
+}
 render();
