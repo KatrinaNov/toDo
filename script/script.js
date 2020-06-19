@@ -36,7 +36,8 @@ const render = function() {
     const todoRemove = li.querySelector('.todo-remove');
     todoRemove.addEventListener('click', function(){
       li.remove();
-      console.log(toDoData);
+      toDoData.splice(toDoData.indexOf(item), 1);
+      localStorage.setItem('todo', JSON.stringify(toDoData));
     });
   });
 };
@@ -55,7 +56,7 @@ todoControl.addEventListener('submit', function(event) {
   localStorage.setItem('todo', JSON.stringify(toDoData));
   render();
 });
-console.log(localStorage.getItem('todo'));
+
 if (localStorage.getItem('todo') !== null){
   toDoData = JSON.parse(localStorage.getItem('todo'));
 }
