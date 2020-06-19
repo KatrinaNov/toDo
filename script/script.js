@@ -4,8 +4,8 @@ const todoControl = document.querySelector('.todo-control'),
       headerInput = document.querySelector('.header-input'),
       todoList = document.querySelector('.todo-list'),
       todoCompleted = document.querySelector('.todo-completed');
-let toDoData = [];
-
+// массив с задачами, берем либо из localStorage, либо путой масиив     
+let toDoData = JSON.parse(localStorage.getItem('todo')) || [];
 
 const render = function() {
   todoList.textContent = '';
@@ -14,10 +14,11 @@ const render = function() {
     const li = document.createElement('li');
     li.classList.add('todo-item');
     li.innerHTML = `<span class="text-todo">${item.value}</span>
-    <div class="todo-buttons">
-				<button class="todo-remove"></button>
-				<button class="todo-complete"></button>
-    </div>`;
+                    <div class="todo-buttons">
+                      <button class="todo-remove"></button>
+                      <button class="todo-complete"></button>
+                    </div>
+                    `;
 
     // добавление  дел
     if (item.completed) {
@@ -57,7 +58,4 @@ todoControl.addEventListener('submit', function(event) {
   render();
 });
 
-if (localStorage.getItem('todo') !== null){
-  toDoData = JSON.parse(localStorage.getItem('todo'));
-}
 render();
